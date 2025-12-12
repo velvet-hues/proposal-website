@@ -88,7 +88,24 @@
 
     </div>
   </div>
+        <audio id="bg-audio" src="./images/audio1.mp3" loop hidden></audio>
 
+        <script>
+  const bgAudio = document.getElementById('bg-audio');
+
+  // Try to play after first user interaction (needed for most browsers)
+  function startBgAudio() {
+    bgAudio.play().catch(() => {
+      // if blocked, you could show a small "Tap to enable sound" later
+      console.warn('Autoplay blocked by browser');
+    });
+    document.removeEventListener('click', startBgAudio);
+    document.removeEventListener('touchstart', startBgAudio);
+  }
+
+  document.addEventListener('click', startBgAudio);
+  document.addEventListener('touchstart', startBgAudio);
+        </script>
   <script type="module">
     import confetti from 'https://cdn.skypack.dev/canvas-confetti';
     const yesButton = document.getElementById('yesButton');
@@ -221,4 +238,5 @@
     </script>
   </script>  
 </body>
+
 </html>
